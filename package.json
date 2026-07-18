@@ -1,0 +1,26 @@
+{
+  "name": "ai-bazi-analysis-platform",
+  "version": "0.0.0",
+  "private": true,
+  "packageManager": "pnpm@11.9.0",
+  "engines": {
+    "node": "24.18.0",
+    "pnpm": "11.9.0"
+  },
+  "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "pnpm --filter @ai-bazi/web lint",
+    "typecheck": "pnpm -r --if-present typecheck",
+    "test": "pnpm -r --if-present test",
+    "test:e2e": "playwright test",
+    "architecture": "dependency-cruiser apps/web packages/contracts packages/ui packages/i18n --config dependency-cruiser.config.cjs",
+    "build": "pnpm -r --if-present build"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.61.1",
+    "dependency-cruiser": "18.1.0",
+    "prettier": "3.9.5",
+    "typescript": "6.0.3"
+  }
+}

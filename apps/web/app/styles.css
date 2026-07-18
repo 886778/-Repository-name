@@ -1,0 +1,50 @@
+:root {
+  color-scheme: light;
+  font-family: Inter, 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  background: #f6f3ec;
+  color: #2a2722;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+main {
+  display: grid;
+  min-height: 100dvh;
+  place-items: center;
+  padding: 1.5rem;
+}
+
+section {
+  width: min(100%, 42rem);
+  padding: clamp(1.5rem, 5vw, 3rem);
+  border: 1px solid #d8d0c1;
+  border-radius: 1.5rem;
+  background: #fffdf8;
+  box-shadow: 0 1rem 3rem rgb(42 39 34 / 8%);
+}
+
+h1 {
+  margin: 0.5rem 0 1rem;
+  font-size: clamp(2rem, 8vw, 3.5rem);
+  line-height: 1.1;
+}
+
+.eyebrow {
+  color: #806a45;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.notice {
+  margin-top: 2rem;
+  color: #625b50;
+  font-size: 0.9rem;
+}

@@ -1,0 +1,65 @@
+[project]
+name = "ai-bazi-analysis-platform"
+version = "0.0.0"
+requires-python = "==3.14.6"
+dependencies = []
+
+[dependency-groups]
+dev = [
+  "httpx>=0.28,<0.29",
+  "hypothesis>=6.0,<7",
+  "import-linter>=2.0,<3",
+  "mypy>=1.18,<2",
+  "pytest>=9.0,<10",
+  "pytest-asyncio>=1.0,<2",
+  "pytest-cov>=7.0,<8",
+  "ruff>=0.14,<0.15",
+  "testcontainers[postgres,redis]>=4.0,<5",
+]
+
+[tool.uv]
+package = false
+
+[tool.uv.workspace]
+members = [
+  "apps/api",
+  "apps/worker",
+  "packages/backend",
+  "packages/shared-kernel",
+]
+
+[tool.ruff]
+target-version = "py314"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "ASYNC"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.mypy]
+python_version = "3.14"
+strict = true
+warn_unused_configs = true
+packages = ["ai_bazi_api", "ai_bazi_worker", "ai_bazi_backend", "ai_bazi_shared_kernel"]
+mypy_path = [
+  "apps/api/src",
+  "apps/worker/src",
+  "packages/backend/src",
+  "packages/shared-kernel/src",
+]
+
+[tool.pytest.ini_options]
+addopts = "--strict-config --strict-markers"
+asyncio_mode = "strict"
+testpaths = ["apps", "packages", "tests"]
+
+[tool.coverage.run]
+branch = true
+source = ["apps", "packages"]
+
+[tool.coverage.report]
+show_missing = true
+skip_empty = true
+

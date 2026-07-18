@@ -1,0 +1,11 @@
+[importlinter]
+root_package = ai_bazi_backend
+
+[importlinter:contract:backend-modules-do-not-import-runtime-composition]
+name = Backend modules must not depend on bootstrap or projections
+type = forbidden
+source_modules =
+    ai_bazi_backend.modules
+forbidden_modules =
+    ai_bazi_backend.bootstrap
+    ai_bazi_backend.projections

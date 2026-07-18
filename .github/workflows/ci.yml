@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: '0.11.29'
+          python-version: '3.14.6'
+          enable-cache: true
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: '11.9.0'
+          run_install: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.18.0'
+          cache: pnpm
+
+      - name: Install locked dependencies
+        run: |
+          uv sync --locked --all-packages
+          pnpm install --frozen-lockfile
+
+      - name: Format
+        run: |
+          uv run ruff format --check apps packages tests
+          pnpm format:check
+
+      - name: Lint
+        run: |
+          uv run ruff check apps packages tests
+          pnpm lint
+
+      - name: Type
+        run: |
+          uv run mypy
+          pnpm typecheck
+
+      - name: Test
+        run: |
+          uv run pytest --cov --cov-report=term-missing
+          pnpm test
+
+      - name: Architecture
+        run: |
+          uv run lint-imports
+          pnpm architecture
+
+      - name: Build
+        run: pnpm build

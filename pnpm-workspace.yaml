@@ -1,0 +1,10 @@
+packages:
+  - 'apps/web'
+  - 'packages/contracts'
+  - 'packages/ui'
+  - 'packages/i18n'
+
+onlyBuiltDependencies:
+  - sharp
+allowBuilds:
+  sharp: set this to true or false
