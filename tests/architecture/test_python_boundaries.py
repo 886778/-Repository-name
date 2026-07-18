@@ -75,11 +75,18 @@ def test_calculation_kernel_has_no_io_or_ai_dependency() -> None:
         "asyncpg",
         "redis",
         "sqlalchemy",
+        "random",
+        "zoneinfo",
         "ai_bazi_backend.modules.ai",
         "ai_bazi_backend.modules.ai_analysis",
         "ai_bazi_backend.platform",
     )
     assert not any(name.startswith(forbidden_prefixes) for name in imports)
+
+    forbidden_calls = ("datetime.now", "datetime.utcnow", "date.today")
+    for source_file in kernel_root.rglob("*.py"):
+        source = source_file.read_text(encoding="utf-8")
+        assert not any(call in source for call in forbidden_calls)
 
 
 def test_calendar_time_engine_has_no_io_runtime_or_ai_dependency() -> None:

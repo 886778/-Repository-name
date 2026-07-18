@@ -47,6 +47,7 @@ class DataSourceKind(StrEnum):
     TIME_ZONE_DATASET = "time_zone_dataset"
     LOCATION_DATASET = "location_dataset"
     EXPERT_GOVERNED = "expert_governed"
+    ENGINEERING_FIXTURE = "engineering_fixture"
 
 
 class MissingReason(StrEnum):

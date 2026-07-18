@@ -13,6 +13,31 @@ from .domain import (
     CalculationInputSnapshotId,
     CalculationPolicy,
 )
+from .four_pillars import (
+    EarthlyBranch,
+    FourPillars,
+    HeavenlyStem,
+    Pillar,
+    PillarKind,
+    PillarRuleVersion,
+)
+from .four_pillars_contracts import four_pillars_result_to_document
+from .four_pillars_engine import (
+    FourPillarsCalculationError,
+    FourPillarsCalculationRequest,
+    FourPillarsCalculationResult,
+    FourPillarsEngine,
+    FourPillarsErrorCode,
+    FourPillarsProvider,
+    FourPillarsRuleManifest,
+    PillarRuleBinding,
+    PillarValue,
+    RuleAuthority,
+)
+from .four_pillars_fixtures import (
+    ExplicitFourPillarsFixtureProvider,
+    FourPillarsFixtureRecord,
+)
 from .kernel import CalculationKernel, KernelRequest, KernelResult, NoOpCalculationKernel
 
 __all__ = [
@@ -26,7 +51,26 @@ __all__ = [
     "CalculationPolicy",
     "CalculationTrace",
     "DerivationKind",
+    "EarthlyBranch",
+    "ExplicitFourPillarsFixtureProvider",
+    "FourPillars",
+    "FourPillarsCalculationError",
+    "FourPillarsCalculationRequest",
+    "FourPillarsCalculationResult",
+    "FourPillarsEngine",
+    "FourPillarsErrorCode",
+    "FourPillarsFixtureRecord",
+    "FourPillarsProvider",
+    "FourPillarsRuleManifest",
+    "HeavenlyStem",
     "KernelRequest",
     "KernelResult",
     "NoOpCalculationKernel",
+    "Pillar",
+    "PillarKind",
+    "PillarRuleBinding",
+    "PillarRuleVersion",
+    "PillarValue",
+    "RuleAuthority",
+    "four_pillars_result_to_document",
 ]

@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contracts.ai-bazi.invalid/m4/candidate-golden-four-pillars/1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "fixtureSetId",
+    "authority",
+    "expertApproval",
+    "purpose",
+    "cases"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "fixtureSetId": { "type": "string", "minLength": 1 },
+    "authority": { "const": "engineering_fixture" },
+    "expertApproval": { "const": "pending" },
+    "purpose": { "type": "string", "minLength": 1 },
+    "cases": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "caseId",
+          "utcInstant",
+          "logicalDate",
+          "offsetCandidateId",
+          "pillars"
+        ],
+        "properties": {
+          "caseId": { "type": "string", "minLength": 1 },
+          "utcInstant": { "type": "string", "format": "date-time" },
+          "logicalDate": { "type": "string", "format": "date" },
+          "offsetCandidateId": { "type": "string", "minLength": 1 },
+          "pillars": {
+            "type": "array",
+            "minItems": 4,
+            "maxItems": 4,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["kind", "stem", "branch"],
+              "properties": {
+                "kind": { "enum": ["year", "month", "day", "hour"] },
+                "stem": {
+                  "enum": [
+                    "jia",
+                    "yi",
+                    "bing",
+                    "ding",
+                    "wu",
+                    "ji",
+                    "geng",
+                    "xin",
+                    "ren",
+                    "gui"
+                  ]
+                },
+                "branch": {
+                  "enum": [
+                    "zi",
+                    "chou",
+                    "yin",
+                    "mao",
+                    "chen",
+                    "si",
+                    "wu",
+                    "wei",
+                    "shen",
+                    "you",
+                    "xu",
+                    "hai"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

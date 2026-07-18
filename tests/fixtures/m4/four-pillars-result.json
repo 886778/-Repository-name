@@ -1,0 +1,195 @@
+{
+  "schemaVersion": "1.0.0",
+  "ruleManifestId": "m4-engineering-fixture-v1",
+  "authority": "engineering_fixture",
+  "pillars": [
+    {
+      "kind": "year",
+      "stem": "geng",
+      "branch": "chen",
+      "rule": {
+        "ruleId": "m4.fixture.year",
+        "ruleSetId": "m4.engineering-fixture",
+        "ruleSetVersion": "0.1.0",
+        "algorithmId": "explicit-fixture-lookup",
+        "algorithmVersion": "0.1.0",
+        "adrReferences": [
+          "docs/adr/ADR-CAND-M4-001-FOUR-PILLARS-RULE-BINDING.md"
+        ]
+      },
+      "evidenceIds": ["m4-request-1:pillar:year"]
+    },
+    {
+      "kind": "month",
+      "stem": "wu",
+      "branch": "zi",
+      "rule": {
+        "ruleId": "m4.fixture.month",
+        "ruleSetId": "m4.engineering-fixture",
+        "ruleSetVersion": "0.1.0",
+        "algorithmId": "explicit-fixture-lookup",
+        "algorithmVersion": "0.1.0",
+        "adrReferences": [
+          "docs/adr/ADR-CAND-M4-001-FOUR-PILLARS-RULE-BINDING.md"
+        ]
+      },
+      "evidenceIds": ["m4-request-1:pillar:month"]
+    },
+    {
+      "kind": "day",
+      "stem": "ji",
+      "branch": "wei",
+      "rule": {
+        "ruleId": "m4.fixture.day",
+        "ruleSetId": "m4.engineering-fixture",
+        "ruleSetVersion": "0.1.0",
+        "algorithmId": "explicit-fixture-lookup",
+        "algorithmVersion": "0.1.0",
+        "adrReferences": [
+          "docs/adr/ADR-CAND-M4-001-FOUR-PILLARS-RULE-BINDING.md"
+        ]
+      },
+      "evidenceIds": ["m4-request-1:pillar:day"]
+    },
+    {
+      "kind": "hour",
+      "stem": "bing",
+      "branch": "yin",
+      "rule": {
+        "ruleId": "m4.fixture.hour",
+        "ruleSetId": "m4.engineering-fixture",
+        "ruleSetVersion": "0.1.0",
+        "algorithmId": "explicit-fixture-lookup",
+        "algorithmVersion": "0.1.0",
+        "adrReferences": [
+          "docs/adr/ADR-CAND-M4-001-FOUR-PILLARS-RULE-BINDING.md"
+        ]
+      },
+      "evidenceIds": ["m4-request-1:pillar:hour"]
+    }
+  ],
+  "evidence": [
+    {
+      "evidenceId": "m4-request-1:input",
+      "kind": "input_snapshot",
+      "name": "calculation_snapshot_id",
+      "value": "snapshot-1",
+      "ruleId": null,
+      "ruleSetId": "m4.engineering-fixture",
+      "ruleSetVersion": "0.1.0",
+      "algorithmId": "explicit-fixture-lookup",
+      "algorithmVersion": "0.1.0",
+      "calculatedAt": "2026-01-01T00:00:00+00:00",
+      "parentIds": [],
+      "sources": [
+        {
+          "sourceId": "m3-normalization",
+          "version": "1.0.0",
+          "kind": "calendar_dataset"
+        }
+      ]
+    },
+    {
+      "evidenceId": "m4-request-1:pillar:year",
+      "kind": "output_value",
+      "name": "year_pillar",
+      "value": "geng-chen",
+      "ruleId": "m4.fixture.year",
+      "ruleSetId": "m4.engineering-fixture",
+      "ruleSetVersion": "0.1.0",
+      "algorithmId": "explicit-fixture-lookup",
+      "algorithmVersion": "0.1.0",
+      "calculatedAt": "2026-01-01T00:00:00+00:00",
+      "parentIds": ["m4-request-1:input"],
+      "sources": [
+        {
+          "sourceId": "m4-engineering-fixture",
+          "version": "1.0.0",
+          "kind": "engineering_fixture"
+        }
+      ]
+    },
+    {
+      "evidenceId": "m4-request-1:pillar:month",
+      "kind": "output_value",
+      "name": "month_pillar",
+      "value": "wu-zi",
+      "ruleId": "m4.fixture.month",
+      "ruleSetId": "m4.engineering-fixture",
+      "ruleSetVersion": "0.1.0",
+      "algorithmId": "explicit-fixture-lookup",
+      "algorithmVersion": "0.1.0",
+      "calculatedAt": "2026-01-01T00:00:00+00:00",
+      "parentIds": ["m4-request-1:input"],
+      "sources": [
+        {
+          "sourceId": "m4-engineering-fixture",
+          "version": "1.0.0",
+          "kind": "engineering_fixture"
+        }
+      ]
+    },
+    {
+      "evidenceId": "m4-request-1:pillar:day",
+      "kind": "output_value",
+      "name": "day_pillar",
+      "value": "ji-wei",
+      "ruleId": "m4.fixture.day",
+      "ruleSetId": "m4.engineering-fixture",
+      "ruleSetVersion": "0.1.0",
+      "algorithmId": "explicit-fixture-lookup",
+      "algorithmVersion": "0.1.0",
+      "calculatedAt": "2026-01-01T00:00:00+00:00",
+      "parentIds": ["m4-request-1:input"],
+      "sources": [
+        {
+          "sourceId": "m4-engineering-fixture",
+          "version": "1.0.0",
+          "kind": "engineering_fixture"
+        }
+      ]
+    },
+    {
+      "evidenceId": "m4-request-1:pillar:hour",
+      "kind": "output_value",
+      "name": "hour_pillar",
+      "value": "bing-yin",
+      "ruleId": "m4.fixture.hour",
+      "ruleSetId": "m4.engineering-fixture",
+      "ruleSetVersion": "0.1.0",
+      "algorithmId": "explicit-fixture-lookup",
+      "algorithmVersion": "0.1.0",
+      "calculatedAt": "2026-01-01T00:00:00+00:00",
+      "parentIds": ["m4-request-1:input"],
+      "sources": [
+        {
+          "sourceId": "m4-engineering-fixture",
+          "version": "1.0.0",
+          "kind": "engineering_fixture"
+        }
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "outputId": "four_pillars.year",
+      "value": "geng-chen",
+      "evidenceIds": ["m4-request-1:pillar:year"]
+    },
+    {
+      "outputId": "four_pillars.month",
+      "value": "wu-zi",
+      "evidenceIds": ["m4-request-1:pillar:month"]
+    },
+    {
+      "outputId": "four_pillars.day",
+      "value": "ji-wei",
+      "evidenceIds": ["m4-request-1:pillar:day"]
+    },
+    {
+      "outputId": "four_pillars.hour",
+      "value": "bing-yin",
+      "evidenceIds": ["m4-request-1:pillar:hour"]
+    }
+  ]
+}

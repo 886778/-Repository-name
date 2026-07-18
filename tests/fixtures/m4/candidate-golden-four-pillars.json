@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "1.0.0",
+  "fixtureSetId": "m4-engineering-candidate-golden-v1",
+  "authority": "engineering_fixture",
+  "expertApproval": "pending",
+  "purpose": "Validate deterministic contracts and evidence wiring only; these values do not assert calendrical or Bazi correctness.",
+  "cases": [
+    {
+      "caseId": "m4-candidate-001",
+      "utcInstant": "2000-01-01T19:04:05+00:00",
+      "logicalDate": "2000-01-02",
+      "offsetCandidateId": "offset-1",
+      "pillars": [
+        { "kind": "year", "stem": "geng", "branch": "chen" },
+        { "kind": "month", "stem": "wu", "branch": "zi" },
+        { "kind": "day", "stem": "ji", "branch": "wei" },
+        { "kind": "hour", "stem": "bing", "branch": "yin" }
+      ]
+    },
+    {
+      "caseId": "m4-candidate-002",
+      "utcInstant": "2000-06-01T00:00:00+00:00",
+      "logicalDate": "2000-06-01",
+      "offsetCandidateId": "offset-2",
+      "pillars": [
+        { "kind": "year", "stem": "jia", "branch": "zi" },
+        { "kind": "month", "stem": "yi", "branch": "chou" },
+        { "kind": "day", "stem": "bing", "branch": "yin" },
+        { "kind": "hour", "stem": "ding", "branch": "mao" }
+      ]
+    },
+    {
+      "caseId": "m4-candidate-003",
+      "utcInstant": "2001-01-31T16:00:00+00:00",
+      "logicalDate": "2001-02-01",
+      "offsetCandidateId": "offset-3",
+      "pillars": [
+        { "kind": "year", "stem": "wu", "branch": "chen" },
+        { "kind": "month", "stem": "ji", "branch": "si" },
+        { "kind": "day", "stem": "geng", "branch": "wu" },
+        { "kind": "hour", "stem": "xin", "branch": "wei" }
+      ]
+    },
+    {
+      "caseId": "m4-candidate-004",
+      "utcInstant": "1999-12-31T15:59:59+00:00",
+      "logicalDate": "1999-12-31",
+      "offsetCandidateId": "offset-4",
+      "pillars": [
+        { "kind": "year", "stem": "ren", "branch": "shen" },
+        { "kind": "month", "stem": "gui", "branch": "you" },
+        { "kind": "day", "stem": "jia", "branch": "xu" },
+        { "kind": "hour", "stem": "yi", "branch": "hai" }
+      ]
+    }
+  ]
+}
