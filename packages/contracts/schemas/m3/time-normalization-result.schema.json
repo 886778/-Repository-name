@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-bazi.example/schemas/m3/time-normalization-result/1.0.0",
+  "title": "Time Normalization Result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "status",
+    "performedAt",
+    "providerManifestIds",
+    "points",
+    "timeline"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "status": { "enum": ["exact", "range", "indeterminate"] },
+    "performedAt": { "type": "string", "format": "date-time" },
+    "providerManifestIds": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "points": {
+      "type": "array",
+      "maxItems": 2,
+      "items": { "$ref": "#/$defs/point" }
+    },
+    "timeline": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/node" }
+    }
+  },
+  "$defs": {
+    "point": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "civilLocalTime",
+        "adjustedLocalTime",
+        "utcInstant",
+        "offsetSeconds",
+        "logicalDate",
+        "offsetCandidateId"
+      ],
+      "properties": {
+        "civilLocalTime": { "type": "string" },
+        "adjustedLocalTime": { "type": "string" },
+        "utcInstant": { "type": "string", "format": "date-time" },
+        "offsetSeconds": {
+          "type": "integer",
+          "minimum": -64800,
+          "maximum": 64800
+        },
+        "logicalDate": { "type": "string", "format": "date" },
+        "offsetCandidateId": { "type": "string", "minLength": 1 }
+      }
+    },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sequence",
+        "derivationId",
+        "step",
+        "value",
+        "parentIds",
+        "sourceId",
+        "sourceVersion"
+      ],
+      "properties": {
+        "sequence": { "type": "integer", "minimum": 0 },
+        "derivationId": { "type": "string", "minLength": 1 },
+        "step": {
+          "enum": [
+            "input_accepted",
+            "calendar_validated",
+            "time_zone_resolved",
+            "utc_converted",
+            "true_solar_time_applied",
+            "day_boundary_resolved"
+          ]
+        },
+        "value": { "type": "string", "minLength": 1 },
+        "parentIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "sourceId": { "type": "string", "minLength": 1 },
+        "sourceVersion": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

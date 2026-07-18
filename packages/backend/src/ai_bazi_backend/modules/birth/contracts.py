@@ -3,7 +3,7 @@
 from dataclasses import dataclass
 from typing import Any
 
-from ai_bazi_backend.modules.calendar_time import (
+from ai_bazi_backend.modules.calendar_time.domain import (
     CalendarDate,
     ClockTime,
     DataSourceKind,

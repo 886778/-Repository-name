@@ -80,3 +80,30 @@ def test_calculation_kernel_has_no_io_or_ai_dependency() -> None:
         "ai_bazi_backend.platform",
     )
     assert not any(name.startswith(forbidden_prefixes) for name in imports)
+
+
+def test_calendar_time_engine_has_no_io_runtime_or_ai_dependency() -> None:
+    calendar_root = PROJECT_ROOT / "packages/backend/src/ai_bazi_backend/modules/calendar_time"
+    imports = imported_modules(calendar_root)
+    forbidden_prefixes = (
+        "socket",
+        "urllib",
+        "http",
+        "httpx",
+        "requests",
+        "asyncpg",
+        "redis",
+        "sqlalchemy",
+        "random",
+        "zoneinfo",
+        "ai_bazi_backend.modules.ai",
+        "ai_bazi_backend.modules.ai_analysis",
+        "ai_bazi_backend.platform",
+        "ai_bazi_backend.bootstrap",
+    )
+    assert not any(name.startswith(forbidden_prefixes) for name in imports)
+
+    forbidden_calls = ("datetime.now", "datetime.utcnow", "date.today")
+    for source_file in calendar_root.rglob("*.py"):
+        source = source_file.read_text(encoding="utf-8")
+        assert not any(call in source for call in forbidden_calls)

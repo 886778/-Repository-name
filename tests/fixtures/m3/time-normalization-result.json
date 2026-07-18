@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "exact",
+  "performedAt": "2026-01-01T00:00:00+00:00",
+  "providerManifestIds": [
+    "gregorian@1.0.0#checksum-gregorian",
+    "test-time-zone@1.0.0#checksum-test-time-zone",
+    "civil-day@1.0.0#checksum-civil-day",
+    "solar-disabled@1.0.0#checksum-solar-disabled"
+  ],
+  "points": [
+    {
+      "civilLocalTime": "2000-01-02T03:04:05",
+      "adjustedLocalTime": "2000-01-02T03:04:05",
+      "utcInstant": "2000-01-01T19:04:05+00:00",
+      "offsetSeconds": 28800,
+      "logicalDate": "2000-01-02",
+      "offsetCandidateId": "offset-1"
+    }
+  ],
+  "timeline": [
+    {
+      "sequence": 0,
+      "derivationId": "normalization-1:input",
+      "step": "input_accepted",
+      "value": "birth-input-calendar-engine",
+      "parentIds": [],
+      "sourceId": "fixture",
+      "sourceVersion": "1.0.0"
+    },
+    {
+      "sequence": 1,
+      "derivationId": "normalization-1:calendar",
+      "step": "calendar_validated",
+      "value": "2000-01-02",
+      "parentIds": ["normalization-1:input"],
+      "sourceId": "gregorian",
+      "sourceVersion": "1.0.0"
+    },
+    {
+      "sequence": 2,
+      "derivationId": "normalization-1:point:0:timezone",
+      "step": "time_zone_resolved",
+      "value": "Test/Zone:28800:offset-1",
+      "parentIds": ["normalization-1:calendar"],
+      "sourceId": "test-time-zone",
+      "sourceVersion": "1.0.0"
+    },
+    {
+      "sequence": 3,
+      "derivationId": "normalization-1:point:0:utc",
+      "step": "utc_converted",
+      "value": "2000-01-01T19:04:05+00:00",
+      "parentIds": ["normalization-1:point:0:timezone"],
+      "sourceId": "test-time-zone",
+      "sourceVersion": "1.0.0"
+    },
+    {
+      "sequence": 4,
+      "derivationId": "normalization-1:point:0:solar",
+      "step": "true_solar_time_applied",
+      "value": "applied=False;delta=0",
+      "parentIds": ["normalization-1:point:0:utc"],
+      "sourceId": "solar-disabled",
+      "sourceVersion": "1.0.0"
+    },
+    {
+      "sequence": 5,
+      "derivationId": "normalization-1:point:0:boundary",
+      "step": "day_boundary_resolved",
+      "value": "2000-01-02",
+      "parentIds": ["normalization-1:point:0:solar"],
+      "sourceId": "civil-day",
+      "sourceVersion": "1.0.0"
+    }
+  ]
+}
