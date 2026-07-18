@@ -22,3 +22,26 @@ def test_api_and_worker_do_not_import_each_other() -> None:
 
     assert not any(name.startswith("ai_bazi_worker") for name in api_imports)
     assert not any(name.startswith("ai_bazi_api") for name in worker_imports)
+
+
+def test_backend_modules_do_not_import_platform_or_runtime_composition() -> None:
+    module_imports = imported_modules(PROJECT_ROOT / "packages/backend/src/ai_bazi_backend/modules")
+
+    forbidden_prefixes = (
+        "ai_bazi_backend.bootstrap",
+        "ai_bazi_backend.platform",
+        "ai_bazi_backend.projections",
+    )
+    assert not any(name.startswith(forbidden_prefixes) for name in module_imports)
+
+
+def test_platform_does_not_depend_on_business_modules_or_projections() -> None:
+    platform_imports = imported_modules(
+        PROJECT_ROOT / "packages/backend/src/ai_bazi_backend/platform"
+    )
+
+    forbidden_prefixes = (
+        "ai_bazi_backend.modules",
+        "ai_bazi_backend.projections",
+    )
+    assert not any(name.startswith(forbidden_prefixes) for name in platform_imports)

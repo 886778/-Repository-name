@@ -1,15 +1,21 @@
 import asyncio
 import logging
 import signal
-from collections.abc import Callable
+from collections.abc import Callable, Mapping
 
-from ai_bazi_backend.bootstrap import configure_runtime
+from ai_bazi_backend.bootstrap import build_runtime
+from ai_bazi_backend.platform.worker import WorkerFramework
 
 LOGGER = logging.getLogger("ai_bazi.worker")
 
 
-async def run_worker(stop_event: asyncio.Event | None = None) -> None:
-    configure_runtime("ai-bazi-worker")
+async def run_worker(
+    stop_event: asyncio.Event | None = None,
+    *,
+    environ: Mapping[str, str] | None = None,
+) -> None:
+    platform_runtime = build_runtime("ai-bazi-worker", environ=environ)
+    framework = WorkerFramework([platform_runtime], logger=LOGGER)
     event = stop_event or asyncio.Event()
     loop = asyncio.get_running_loop()
 
@@ -18,9 +24,11 @@ async def run_worker(stop_event: asyncio.Event | None = None) -> None:
         for signal_name in (signal.SIGINT, signal.SIGTERM):
             loop.add_signal_handler(signal_name, stop)
 
-    LOGGER.info("worker_started")
-    await event.wait()
-    LOGGER.info("worker_stopped")
+    await framework.startup()
+    try:
+        await event.wait()
+    finally:
+        await framework.shutdown()
 
 
 def main() -> None:

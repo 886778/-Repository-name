@@ -24,6 +24,7 @@ fi
 [[ "$($uv_bin run python --version)" == "Python 3.14.6" ]]
 
 "$uv_bin" lock --check
+"$uv_bin" sync --locked --all-packages
 "$uv_bin" run ruff format --check apps packages tests
 "$uv_bin" run ruff check apps packages tests
 "$uv_bin" run mypy

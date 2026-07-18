@@ -8,4 +8,14 @@ source_modules =
     ai_bazi_backend.modules
 forbidden_modules =
     ai_bazi_backend.bootstrap
+    ai_bazi_backend.platform
+    ai_bazi_backend.projections
+
+[importlinter:contract:platform-does-not-depend-on-business-modules]
+name = Platform must not depend on business modules or projections
+type = forbidden
+source_modules =
+    ai_bazi_backend.platform
+forbidden_modules =
+    ai_bazi_backend.modules
     ai_bazi_backend.projections
