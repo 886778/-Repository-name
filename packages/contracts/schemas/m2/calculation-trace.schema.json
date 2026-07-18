@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-bazi.example/schemas/m2/calculation-trace/1.0.0",
+  "title": "Calculation Derivation Trace",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "evidence", "outputs"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/evidence" }
+    },
+    "outputs": { "type": "array", "items": { "$ref": "#/$defs/output" } }
+  },
+  "$defs": {
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidenceId",
+        "kind",
+        "name",
+        "value",
+        "ruleId",
+        "ruleSetId",
+        "ruleSetVersion",
+        "algorithmId",
+        "algorithmVersion",
+        "sources",
+        "calculatedAt",
+        "parentIds",
+        "warningCodes",
+        "uncertainties"
+      ],
+      "properties": {
+        "evidenceId": { "type": "string", "minLength": 1 },
+        "kind": {
+          "enum": ["input_snapshot", "intermediate_value", "output_value"]
+        },
+        "name": { "type": "string", "minLength": 1 },
+        "value": { "type": ["string", "integer", "boolean"] },
+        "ruleId": { "type": ["string", "null"] },
+        "ruleSetId": { "type": "string", "minLength": 1 },
+        "ruleSetVersion": { "$ref": "#/$defs/version" },
+        "algorithmId": { "type": "string", "minLength": 1 },
+        "algorithmVersion": { "$ref": "#/$defs/version" },
+        "sources": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "object" }
+        },
+        "calculatedAt": { "type": "string", "format": "date-time" },
+        "parentIds": {
+          "type": "array",
+          "items": { "type": "string" },
+          "uniqueItems": true
+        },
+        "warningCodes": { "type": "array", "items": { "type": "string" } },
+        "uncertainties": { "type": "array", "items": { "type": "object" } }
+      }
+    },
+    "output": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["outputId", "value", "evidenceIds"],
+      "properties": {
+        "outputId": { "type": "string", "minLength": 1 },
+        "value": { "type": ["string", "integer", "boolean"] },
+        "evidenceIds": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      }
+    }
+  }
+}

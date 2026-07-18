@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "1.0.0",
+  "inputId": "",
+  "calendar": "unsupported",
+  "date": "",
+  "time": "25:61",
+  "place": { "reason": "not_provided" },
+  "timeZone": { "reason": "unknown" },
+  "ruleSexMarker": "invented",
+  "source": { "sourceId": "", "version": "", "kind": "user_provided" },
+  "confirmation": "confirmed"
+}

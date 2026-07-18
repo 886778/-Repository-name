@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-bazi.example/schemas/m2/raw-birth-input/1.0.0",
+  "title": "Raw Birth Input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "inputId",
+    "calendar",
+    "date",
+    "time",
+    "place",
+    "timeZone",
+    "ruleSexMarker",
+    "source",
+    "confirmation"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "inputId": { "type": "string", "minLength": 1 },
+    "calendar": { "enum": ["gregorian", "chinese_lunisolar"] },
+    "date": { "type": "string", "minLength": 1 },
+    "time": { "oneOf": [{ "type": "string" }, { "$ref": "#/$defs/missing" }] },
+    "place": { "oneOf": [{ "type": "string" }, { "$ref": "#/$defs/missing" }] },
+    "timeZone": {
+      "oneOf": [{ "type": "string" }, { "$ref": "#/$defs/missing" }]
+    },
+    "ruleSexMarker": { "enum": ["male", "female", "unspecified"] },
+    "source": { "$ref": "#/$defs/source" },
+    "confirmation": { "enum": ["unconfirmed", "confirmed", "rejected"] }
+  },
+  "$defs": {
+    "missing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reason"],
+      "properties": {
+        "reason": {
+          "enum": ["not_provided", "unknown", "withheld", "not_applicable"]
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourceId", "version", "kind"],
+      "properties": {
+        "sourceId": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 },
+        "kind": {
+          "enum": [
+            "user_provided",
+            "calendar_dataset",
+            "time_zone_dataset",
+            "location_dataset",
+            "expert_governed"
+          ]
+        }
+      }
+    }
+  }
+}

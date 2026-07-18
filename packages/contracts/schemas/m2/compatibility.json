@@ -1,0 +1,9 @@
+{
+  "policyVersion": "1.0.0",
+  "policy": "Backward-compatible additions require a new minor schema version; removals, type changes, semantic changes, or newly required fields require a new major version. Existing versions remain readable while referenced by a retained snapshot.",
+  "schemas": {
+    "raw-birth-input": { "current": "1.0.0", "readable": ["1.0.0"] },
+    "calculation-input": { "current": "1.0.0", "readable": ["1.0.0"] },
+    "calculation-trace": { "current": "1.0.0", "readable": ["1.0.0"] }
+  }
+}

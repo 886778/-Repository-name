@@ -1,0 +1,185 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-bazi.example/schemas/m2/calculation-input/1.0.0",
+  "title": "Canonical Calculation Input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "snapshotId",
+    "birthInputId",
+    "calendarDate",
+    "birthTime",
+    "timeZone",
+    "coordinates",
+    "ruleSexMarker",
+    "sourceChain",
+    "uncertainties",
+    "confirmation",
+    "policy"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "snapshotId": { "type": "string", "minLength": 1 },
+    "birthInputId": { "type": "string", "minLength": 1 },
+    "calendarDate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "year",
+        "month",
+        "day",
+        "calendar",
+        "precision",
+        "leapMonth"
+      ],
+      "properties": {
+        "year": { "type": "integer", "minimum": 1, "maximum": 9999 },
+        "month": { "type": ["integer", "null"], "minimum": 1, "maximum": 12 },
+        "day": { "type": ["integer", "null"], "minimum": 1, "maximum": 31 },
+        "calendar": { "enum": ["gregorian", "chinese_lunisolar"] },
+        "precision": { "enum": ["year", "month", "day"] },
+        "leapMonth": { "type": ["boolean", "null"] }
+      }
+    },
+    "birthTime": {
+      "oneOf": [
+        { "$ref": "#/$defs/clockTime" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["start", "end", "precision"],
+          "properties": {
+            "start": { "$ref": "#/$defs/clockTime" },
+            "end": { "$ref": "#/$defs/clockTime" },
+            "precision": { "const": "range" }
+          }
+        },
+        { "$ref": "#/$defs/missing" }
+      ]
+    },
+    "timeZone": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "resolution",
+        "selected",
+        "candidates",
+        "sourceId",
+        "sourceVersion"
+      ],
+      "properties": {
+        "resolution": { "enum": ["resolved", "ambiguous", "unresolved"] },
+        "selected": { "type": ["string", "null"] },
+        "candidates": {
+          "type": "array",
+          "items": { "type": "string" },
+          "uniqueItems": true
+        },
+        "sourceId": { "type": "string", "minLength": 1 },
+        "sourceVersion": { "type": "string", "minLength": 1 }
+      }
+    },
+    "coordinates": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "latitude",
+            "longitude",
+            "precision",
+            "sourceId",
+            "sourceVersion"
+          ],
+          "properties": {
+            "latitude": {
+              "type": "string",
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?$"
+            },
+            "longitude": {
+              "type": "string",
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?$"
+            },
+            "precision": { "enum": ["exact", "locality", "region", "unknown"] },
+            "sourceId": { "type": "string", "minLength": 1 },
+            "sourceVersion": { "type": "string", "minLength": 1 }
+          }
+        },
+        { "$ref": "#/$defs/missing" }
+      ]
+    },
+    "ruleSexMarker": { "enum": ["male", "female", "unspecified"] },
+    "sourceChain": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/source" }
+    },
+    "uncertainties": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/uncertainty" }
+    },
+    "confirmation": { "const": "confirmed" },
+    "policy": { "enum": ["strict", "allow_partial"] }
+  },
+  "$defs": {
+    "clockTime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["hour", "minute", "second", "precision"],
+      "properties": {
+        "hour": { "type": "integer", "minimum": 0, "maximum": 23 },
+        "minute": { "type": ["integer", "null"], "minimum": 0, "maximum": 59 },
+        "second": { "type": ["integer", "null"], "minimum": 0, "maximum": 59 },
+        "precision": { "enum": ["second", "minute", "hour"] }
+      }
+    },
+    "missing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reason"],
+      "properties": {
+        "reason": {
+          "enum": ["not_provided", "unknown", "withheld", "not_applicable"]
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourceId", "version", "kind"],
+      "properties": {
+        "sourceId": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 },
+        "kind": {
+          "enum": [
+            "user_provided",
+            "calendar_dataset",
+            "time_zone_dataset",
+            "location_dataset",
+            "expert_governed"
+          ]
+        }
+      }
+    },
+    "uncertainty": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "field", "detail"],
+      "properties": {
+        "code": {
+          "enum": [
+            "missing",
+            "approximate",
+            "range_only",
+            "ambiguous_time_zone",
+            "ambiguous_local_time",
+            "unverified_source"
+          ]
+        },
+        "field": { "type": "string", "minLength": 1 },
+        "detail": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

@@ -45,3 +45,38 @@ def test_platform_does_not_depend_on_business_modules_or_projections() -> None:
         "ai_bazi_backend.projections",
     )
     assert not any(name.startswith(forbidden_prefixes) for name in platform_imports)
+
+
+def test_domain_does_not_import_framework_or_infrastructure() -> None:
+    domain_root = PROJECT_ROOT / "packages/backend/src/ai_bazi_backend/modules"
+    imports = imported_modules(domain_root)
+    forbidden_prefixes = (
+        "fastapi",
+        "pydantic",
+        "asyncpg",
+        "redis",
+        "sqlalchemy",
+        "ai_bazi_backend.platform",
+        "ai_bazi_backend.bootstrap",
+        "apps",
+    )
+    assert not any(name.startswith(forbidden_prefixes) for name in imports)
+
+
+def test_calculation_kernel_has_no_io_or_ai_dependency() -> None:
+    kernel_root = PROJECT_ROOT / "packages/backend/src/ai_bazi_backend/modules/chart_calculation"
+    imports = imported_modules(kernel_root)
+    forbidden_prefixes = (
+        "socket",
+        "urllib",
+        "http",
+        "httpx",
+        "requests",
+        "asyncpg",
+        "redis",
+        "sqlalchemy",
+        "ai_bazi_backend.modules.ai",
+        "ai_bazi_backend.modules.ai_analysis",
+        "ai_bazi_backend.platform",
+    )
+    assert not any(name.startswith(forbidden_prefixes) for name in imports)

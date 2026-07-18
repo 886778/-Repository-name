@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "1.0.0",
+  "evidence": [
+    {
+      "evidenceId": "calc-evidence-input-1",
+      "kind": "input_snapshot",
+      "name": "calculation_input_snapshot_id",
+      "value": "snapshot-1",
+      "ruleId": null,
+      "ruleSetId": "ruleset-empty",
+      "ruleSetVersion": "0.0.0",
+      "algorithmId": "noop-kernel",
+      "algorithmVersion": "0.0.0",
+      "sources": [
+        { "sourceId": "fixture", "version": "1.0.0", "kind": "user_provided" }
+      ],
+      "calculatedAt": "2026-01-01T00:00:00+00:00",
+      "parentIds": [],
+      "warningCodes": ["NO_OP_KERNEL"],
+      "uncertainties": []
+    }
+  ],
+  "outputs": []
+}

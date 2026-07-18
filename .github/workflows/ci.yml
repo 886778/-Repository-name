@@ -36,6 +36,9 @@ jobs:
           uv sync --locked --all-packages
           pnpm install --frozen-lockfile
 
+      - name: Secret scan
+        run: bash scripts/secret-scan.sh
+
       - name: Format
         run: |
           uv run ruff format --check apps packages tests

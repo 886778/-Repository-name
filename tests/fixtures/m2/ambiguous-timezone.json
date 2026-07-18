@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "1.0.0",
+  "snapshotId": "snapshot-ambiguous-zone",
+  "birthInputId": "birth-input-ambiguous-zone",
+  "calendarDate": {
+    "year": 2000,
+    "month": 1,
+    "day": 2,
+    "calendar": "gregorian",
+    "precision": "day",
+    "leapMonth": null
+  },
+  "birthTime": {
+    "hour": 1,
+    "minute": 30,
+    "second": null,
+    "precision": "minute"
+  },
+  "timeZone": {
+    "resolution": "ambiguous",
+    "selected": null,
+    "candidates": ["Zone/Candidate-A", "Zone/Candidate-B"],
+    "sourceId": "timezone-pending",
+    "sourceVersion": "pending"
+  },
+  "coordinates": { "reason": "unknown" },
+  "ruleSexMarker": "unspecified",
+  "sourceChain": [
+    { "sourceId": "user-form", "version": "1.0.0", "kind": "user_provided" }
+  ],
+  "uncertainties": [
+    {
+      "code": "ambiguous_time_zone",
+      "field": "timeZone",
+      "detail": "User confirmation required"
+    }
+  ],
+  "confirmation": "confirmed",
+  "policy": "strict"
+}
